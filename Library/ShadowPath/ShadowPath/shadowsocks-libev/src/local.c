@@ -1733,6 +1733,9 @@ start_ss_local_server(profile_t profile, shadowsocks_cb cb, void *data)
     int remote_port   = profile.remote_port;
     int local_port    = profile.local_port;
     int timeout       = profile.timeout;
+    char *protocol    = profile.protocol; // SSR
+    char *obfs        = profile.obfs; // SSR
+    char *obfs_param  = profile.obfs_param; // SSR
     int mtu           = 0;
     int mptcp         = 0;
     stat_fd = profile.stat_fd;
@@ -1797,7 +1800,10 @@ start_ss_local_server(profile_t profile, shadowsocks_cb cb, void *data)
     listen_ctx.remote_addr    = remote_addr_tmp;
     listen_ctx.remote_addr[0] = (struct sockaddr *)storage;
     listen_ctx.timeout        = timeout;
+    listen_ctx.protocol_name = protocol;
     listen_ctx.method         = m;
+    listen_ctx.obfs_name = obfs;
+    listen_ctx.obfs_param = obfs_param;
     listen_ctx.iface          = NULL;
     listen_ctx.mptcp          = mptcp;
     listen_ctx.list_protocol_global = malloc(sizeof(void *));

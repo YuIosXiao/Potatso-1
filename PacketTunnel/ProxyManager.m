@@ -102,7 +102,6 @@ int sock_port (int fd) {
     NSString *protocol = json[@"protocol"];
     NSString *obfs = json[@"obfs"];
     NSString *obfs_param = json[@"obfs_param"];
-    BOOL ota = [json[@"ota"] boolValue];
     if (host && port && password && authscheme) {
         profile_t profile;
         memset(&profile, 0, sizeof(profile_t));
@@ -113,7 +112,6 @@ int sock_port (int fd) {
         profile.local_addr = "127.0.0.1";
         profile.local_port = 0;
         profile.timeout = 600;
-        profile.auth = ota;
         if (protocol.length > 0) {
             profile.protocol = strdup([protocol UTF8String]);
         }
